@@ -1,2 +1,4 @@
 # PublicationHubManager_API_JS
-Este sistema backend  con NodeJS,JavaScript y MongoDB  tiene como objetivo crear un sistema de gestión de opiniones similar a las publicaciones de Facebook, con funcionalidades específicas centradas en la interacción y expresión de opiniones por parte de los usuarios. 
+*** By: Anthony Josue Escobar Ponce
+** BACKEND - API WEB:
+* JavaScript / NodeJS / MongoDB
