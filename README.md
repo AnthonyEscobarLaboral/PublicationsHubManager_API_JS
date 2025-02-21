@@ -4,6 +4,6 @@
 * JavaScript / NodeJS / MongoDB
 
 ### Teacher - ADMIN Credentials:
-* "email": "aescobar@gmail.com",
-* "username": "aescobar",
-* "password": "UserPass123@"
+* "email": "becheverria@gmail.com",
+* "username": "becheverria",
+* "password": "AdminPass@123"
