@@ -26,13 +26,13 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const { emailOrUsername, password } = req.body
+    const { email,username, password } = req.body
     try{
-        const user = await User.findOne({$or:[{email: emailOrUsername}, {username: emailOrUsername}]})
+        const user = await User.findOne({$or:[{email: email}, {username: username}]})
 
         if(!user){
             return res.status(400).json({
-                message: "Email or username not valid, try again",
+                message: "Email or username provided not found, try again",
                 error:"the user provided doesnt exists"
             })
         }
@@ -49,7 +49,14 @@ export const login = async (req, res) => {
         
         return res.status(200).json({
             message: "Login successful",
-            user,
+            user: {
+                completeName: user.completeName,
+                username: user.username,
+                email: user.email,
+                type: user.type,
+                createdAt: user.createdAt, 
+                updatedAt: user.updatedAt,
+            },
             token:token
         })
     }catch(err){

@@ -15,9 +15,23 @@ export const usernameExists = async (username = "") => {
 }
 
 export const userFound = async (uid = " ") => {
-    const exists = await User.findById(uid)
-    if(!exists){
-        throw new Error(`The user provided doesnt exists`)
+    const found = await User.findById(uid)
+    if(!found){
+        throw new Error(`The user provided does not exists nor it could be found`)
+    }
+}
+
+export const usernameFound = async (username = "") => {
+    const found = await User.findOne({username})
+    if(!found){
+        throw new Error(`The username provided: ${username} does not exists nor it could be found`)
+    }
+}
+
+export const emailFound = async (email = "") => {
+    const found = await User.findOne({email})
+    if(!found){
+        throw new Error(`The email provided: ${email} does not exists nor it could be found`)
     }
 }
 

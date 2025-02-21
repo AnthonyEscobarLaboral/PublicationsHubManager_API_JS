@@ -7,6 +7,8 @@ import morgan from "morgan";
 import User from "../src/user/user.model.js";
 import Category from "../src/category/category.model.js";
 import { dbConnection } from "./dbMongoConnection.js";
+import authRoutes from "../src/auth/auth.routes.js";
+import userRoutes from "../src/user/user.routes.js";
 
 const configs = (app) => {
     app.use(express.urlencoded({ extended: false }))
@@ -16,6 +18,10 @@ const configs = (app) => {
     app.use(morgan("dev"))
 }
 
+const routes = (app) =>{
+    app.use("/PublicationsHubManager/v1/auth", authRoutes)
+    app.use("/PublicationsHubManager/v1/user", userRoutes)
+}
 
 const connectionDB = async () => {
     try {
@@ -26,12 +32,11 @@ const connectionDB = async () => {
     }
 }
 
-
 export const defaultAdminAccount = async () => {
     try {
         const admin = await User.findOne({ type: "ADMIN" });
         if (admin) {
-            return console.log(`An admin account already exists:${admin}`);
+            return console.log(`An admin account already exists`);
         }
         const defaultAdmin = {
             completeName: "Braulio Jose Echeverria Montufar",
@@ -43,7 +48,7 @@ export const defaultAdminAccount = async () => {
         defaultAdmin.password = encryptedPassword;
         await User.create(defaultAdmin);
 
-        return console.log(`Admin default account created succesfully:${defaultAdmin.toJson()}`);
+        return console.log(`Admin default account created succesfully:`);
 
     } catch (err) {
         return console.error(`Error creating default admin account:${err}`);
@@ -54,14 +59,14 @@ export const defaultCategory = async () => {
     try {
         const categoryFound = await Category.findOne({ categoryName: "General" });
         if (categoryFound) {
-            return console.log(`An default category already exists:${categoryFound}`);
+            return console.log(`An default category already exists`);
         }
         const defaultCategory = {
             categoryName: "General"
         }
         await Category.create(defaultCategory);
 
-        return console.log(`Default category created succesfully:${defaultCategory.toJson()}`);
+        return console.log(`Default category created succesfully`);
 
     } catch (err) {
         return console.error(`Error creating a default category:${err}`);
@@ -73,6 +78,7 @@ export const initServer = () => {
     try {
         configs(app)
         connectionDB()
+        routes(app)
         defaultAdminAccount()
         defaultCategory()
         app.listen(process.env.PORT)

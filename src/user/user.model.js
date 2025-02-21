@@ -25,11 +25,11 @@ const userSchema = Schema({
         enum: ["USER", "ADMIN"],
         default: "USER"
     },
-    publication: [{
+    publications: [{
         type: Schema.Types.ObjectId,
         ref: 'publication'
     }],
-    comment: [{
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: 'comment'
     }]
