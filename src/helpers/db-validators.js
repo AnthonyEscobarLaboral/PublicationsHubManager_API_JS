@@ -1,5 +1,6 @@
 import User from "../user/user.model.js"
 import Category from "../category/category.model.js"
+import Publication from "../publication/publication.model.js"
 
 export const emailExists = async (email = "") => {
     const exists = await User.findOne({email})
@@ -15,10 +16,25 @@ export const usernameExists = async (username = "") => {
     }
 }
 
+
+export const categoryNameFound = async (categoryName = " ") => {
+    const found = await Category.findOne({categoryName})
+    if(!found){
+        throw new Error(`The category provided does not exists nor it could be found`)
+    }
+}
+
 export const categoryFound = async (cid = " ") => {
     const found = await Category.findById(cid)
     if(!found){
         throw new Error(`The category provided does not exists nor it could be found`)
+    }
+}
+
+export const postFound = async (pib = " ") => {
+    const found = await Publication.findById(pib)
+    if(!found){
+        throw new Error(`The publications provided does not exists nor it could be found`)
     }
 }
 
