@@ -12,6 +12,7 @@ import userRoutes from "../src/user/user.routes.js";
 import categoryRoutes from "../src/category/category.routes.js";
 import publicationRoutes from "../src/publication/publication.routes.js";
 import commentRoutes from "../src/comment/comment.routes.js";
+import { swaggerDocs, swaggerUi } from "./swagger.js";
 
 
 const configs = (app) => {
@@ -28,6 +29,7 @@ const routes = (app) =>{
     app.use("/publicationsHubManager/v1/category", categoryRoutes)
     app.use("/publicationsHubManager/v1/publication", publicationRoutes)
     app.use("/publicationsHubManager/v1/comment", commentRoutes)
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 }
 
 const connectionDB = async () => {
