@@ -15,6 +15,12 @@ const categorySchema = Schema({
 {
     versionKey: false,
     timestamps: true
-})
+});
+
+categorySchema.methods.toJSON = function(){
+    const {_id, ...category} = this.toObject()
+    category.cid = _id
+    return category
+}
 
 export default model("Category", categorySchema)

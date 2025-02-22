@@ -24,15 +24,7 @@ const userSchema = Schema({
         type: String,
         enum: ["USER", "ADMIN"],
         default: "USER"
-    },
-    publications: [{
-        type: Schema.Types.ObjectId,
-        ref: 'publication'
-    }],
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'comment'
-    }]
+    }
 },
 {
     versionKey: false,
