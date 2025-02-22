@@ -1,7 +1,5 @@
 import Publication from "./publication.model.js";
-import User from "../user/user.model.js";
 import Category from "../category/category.model.js";
-import { validateAdminAccount } from "../middlewares/validate-types.js";
 
 
 export const createPublication = async (req, res) => {
